@@ -18,12 +18,16 @@ private int publicationYear;
 
 public Book() {
 }
-
-public Book(String title, String author, int publicationYear) {
+public Book(String title, String author) {
+    this.title = title;
+    this.author = author;
+    
+}
+ public Book(String title, String author, int publicationYear) {
     this.title = title;
     this.author = author;
     this.publicationYear = publicationYear;
-}
+} 
 public Long getId() {
     return id;
 }
