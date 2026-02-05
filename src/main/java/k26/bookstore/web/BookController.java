@@ -17,7 +17,7 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
 
     private final BookRepository bookRepository;
-	// constructor injection. Can only be one constructor then.
+	
 	public BookController(BookRepository bookRepository) {
 		this.bookRepository = bookRepository;
 	}
