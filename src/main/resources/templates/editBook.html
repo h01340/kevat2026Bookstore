@@ -5,12 +5,13 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Add student</h1>
+	<h1>Muuokkaa kirjan tietoja</h1>
 	<div>
 		<form th:object="${book}" th:action="@{/saveEditedBook}" action="#" method="post">
 			<input type="text" id="id" th:field="*{id}" readonly/>
 		  	<label for="title">title</label>
 			<input type="text" id="title" th:field="*{title}" />
+			<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>	
 		  	<label for="author">author</label>
 			<input type="text" id="author" th:field="*{author}" />
 		  	<label>Vuosi</label>

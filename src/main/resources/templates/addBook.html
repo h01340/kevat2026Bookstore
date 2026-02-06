@@ -5,16 +5,23 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Add student</h1>
+	<h1>Lisää kirja</h1>
 	<div>
 		<form th:object="${book}" th:action="@{saveBook}" action="#" method="post">
-		  	<label for="title">title</label>
+		  	<label for="title">Kirjan nimi</label>
 			<input type="text" id="title" th:field="*{title}" />
-		  	<label for="author">author</label>
+			<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>	
+			<br>
+		  	<label for="author">Kirjailija</label>
 			<input type="text" id="author" th:field="*{author}" />
+			<br>
 		  	<label>Vuosi</label>
 			<input type="text" th:field="*{publicationYear}" />
-			
+			<br>
+			<label >Kategoria</label>
+			 <select th:field="*{category}" >
+       			<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    		</select>
 			<input type="submit" value="Save"></input>
 		</form>
 	</div>
