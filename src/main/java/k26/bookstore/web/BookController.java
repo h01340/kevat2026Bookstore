@@ -28,13 +28,30 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
         this.categoryRepository = categoryRepository;
 	}
 
-    @GetMapping(value={"/", "/books"})
+    @GetMapping(value={"/", "/booklist"})
     public String getBooks(Model model) {
 
         //bookRepository.findAll = Sql select * from book
         model.addAttribute("books", bookRepository.findAll());
         return "/books";
     }
+ 
+ /*       @GetMapping("/")
+    public String getBooks(Model model) {
+
+        //bookRepository.findAll = Sql select * from book
+        model.addAttribute("books", bookRepository.findAll());
+        return "/books";
+    }
+
+           @GetMapping("/books")
+    public String getBooks2String(Model model) {
+
+        //bookRepository.findAll = Sql select * from book
+        model.addAttribute("books", bookRepository.findAll());
+        return "/books";
+    }
+ */
 
     @GetMapping("/addBook")
     public String addBook(Model model) {
@@ -55,7 +72,7 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
         }
         bookRepository.save(book);
-        return "redirect:/books";
+        return "redirect:/booklist";
     }
 
     @GetMapping("/deleteBook/{id}")
@@ -63,18 +80,21 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
         log.info("Kirjan id " + bookId);
         //sql delete from book where id =?
         bookRepository.deleteById(bookId);
-        return "redirect:/books";
+        return "redirect:/booklist";
     }
     
     @GetMapping("/editBook/{id}")
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         log.info("Kirjan id " + bookId);
+
         model.addAttribute("book", bookRepository.findById(bookId));
+         model.addAttribute("categories", categoryRepository.findAll());
         return "/editBook";
     }
 
     @PostMapping("/saveEditedBook")
     public String saveEditedBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model) {
+        log.info("EDITED BOOK: " + book.toString());
          if (bindingResult.hasErrors()) {
             log.info("validation error tapahtui: " + book.toString());
             model.addAttribute("book", book);
@@ -82,7 +102,7 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
             return "/editBook";
         }
         bookRepository.save(book);
-        return "redirect:/books";
+        return "redirect:/booklist";
     }
     
 

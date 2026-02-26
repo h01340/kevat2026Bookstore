@@ -1,5 +1,7 @@
 package k26.bookstore.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,10 +23,12 @@ public class Book {
     private String title;
 
     private String author;
+
     private int publicationYear;
 
+   @JsonIgnoreProperties("books")
     @ManyToOne
-    @JoinColumn(name = "categoryid")
+    @JoinColumn(name = "category_id")
     private Category category; 
 
 

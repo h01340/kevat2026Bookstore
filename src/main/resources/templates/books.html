@@ -1,10 +1,13 @@
 <!doctype html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
   <head>
     <title>Kirjat</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out" />
+    </form>
     <h1>Kirjat</h1>
     <table>
       <tr>
@@ -17,8 +20,8 @@
         <td th:text="${kirja.title}"></td>
         <td th:text="${kirja.author}"></td>
         <td th:text="${kirja.publicationYear}"></td>
-        <td th:text="${kirja.category.name}"></td>
-
+        <!--<td th:text="${kirja.category.name}"></td> -->
+        <td th:text="${kirja.category != null ? kirja.category.name : ''}">category</td>
         <td><a th:href="@{/deleteBook/{id}(id=${kirja.id})}">Poista</a></td>
         <td><a th:href="@{/editBook/{id}(id=${kirja.id})}">Muokkaa</a></td>
       </tr>

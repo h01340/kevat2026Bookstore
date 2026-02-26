@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <title>Kirja</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -16,7 +16,10 @@
 			<input type="text" id="author" th:field="*{author}" />
 		  	<label>Vuosi</label>
 			<input type="text" th:field="*{publicationYear}" />
-			
+			<label >Kategoria</label>
+			 <select th:field="*{category}" >
+       			<option th:each="category: ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    		</select>
 			<input type="submit" value="Save"></input>
 		</form>
 	</div>
