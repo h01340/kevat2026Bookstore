@@ -2,6 +2,7 @@ package k26.bookstore.web;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -76,6 +77,7 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
     }
 
     @GetMapping("/deleteBook/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
         log.info("Kirjan id " + bookId);
         //sql delete from book where id =?

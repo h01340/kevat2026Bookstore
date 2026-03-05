@@ -7,6 +7,7 @@
   <body>
     <form th:action="@{/logout}" method="post">
       <input type="submit" value="Sign Out" />
+      <h3>Käyttäjä: <span sec:authentication="name"></span></h3>
     </form>
     <h1>Kirjat</h1>
     <table>
@@ -22,10 +23,10 @@
         <td th:text="${kirja.publicationYear}"></td>
         <!--<td th:text="${kirja.category.name}"></td> -->
         <td th:text="${kirja.category != null ? kirja.category.name : ''}">category</td>
-        <td><a th:href="@{/deleteBook/{id}(id=${kirja.id})}">Poista</a></td>
-        <td><a th:href="@{/editBook/{id}(id=${kirja.id})}">Muokkaa</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/deleteBook/{id}(id=${kirja.id})}">Poista</a></td>
+        <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/editBook/{id}(id=${kirja.id})}">Muokkaa</a></td>
       </tr>
     </table>
-    <a href="/addBook">Lisää kirja</a>
+    <a sec:authorize="hasAuthority('ADMIN')" href="/addBook">Lisää kirja</a>
   </body>
 </html>
