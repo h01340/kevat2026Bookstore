@@ -2,6 +2,7 @@ package k26.bookstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,7 +16,7 @@ import jakarta.validation.constraints.Size;
 public class Book {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotEmpty(message = "Kirjan nimi ei voi olla tyhjä.")
@@ -24,6 +25,7 @@ public class Book {
 
     private String author;
 
+    @Column(name="publication_year")
     private int publicationYear;
 
    @JsonIgnoreProperties("books")

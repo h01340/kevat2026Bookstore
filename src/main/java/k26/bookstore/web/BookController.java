@@ -88,6 +88,7 @@ public class BookController {
     }
     
     @GetMapping("/editBook/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         log.info("Kirjan id " + bookId);
 
@@ -97,6 +98,7 @@ public class BookController {
     }
 
     @PostMapping("/saveEditedBook")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveEditedBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model) {
         log.info("EDITED BOOK: " + book.toString());
          if (bindingResult.hasErrors()) {
