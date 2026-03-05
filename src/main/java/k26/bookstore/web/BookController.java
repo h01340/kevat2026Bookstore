@@ -18,7 +18,7 @@ import k26.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
-private static final Logger log = LoggerFactory.getLogger(BookController.class);
+    private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
     private final BookRepository bookRepository;
 	private final CategoryRepository categoryRepository;
@@ -55,6 +55,7 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
  */
 
     @GetMapping("/addBook")
+    @PreAuthorize("hasRole('ADMIN')")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
@@ -63,6 +64,7 @@ private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
     
     @PostMapping("/saveBook")
+    @PreAuthorize("hasRole('ADMIN')")
     public String saveBook(@Valid Book book, BindingResult bindingResult, Model model) {
         log.info("Kirja " + book.toString());
         if (bindingResult.hasErrors()) {

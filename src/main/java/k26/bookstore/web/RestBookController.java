@@ -3,6 +3,8 @@ package k26.bookstore.web;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +20,8 @@ import k26.bookstore.domain.BookRepository;
 @RestController
 public class RestBookController {
 
-
+    private static final Logger log = LoggerFactory.getLogger(RestBookController.class);
+    
     private final BookRepository bookRepository;
     
     public RestBookController(BookRepository bookRepository) {
@@ -37,12 +40,15 @@ public class RestBookController {
 
     @PostMapping("/books")
     public Book saveBook(@RequestBody Book book) {
+        log.info("Save new book to db: " + book);
         return bookRepository.save(book);
     }
 
     @PutMapping("books/{id}")
     public Book saveEditedBook(@RequestBody Book editedBook, @PathVariable Long id) {
-		editedBook.setId(id);
+		log.info("Update the book information to db: " + editedBook + " and id is " + id);
+        editedBook.setId(id);
+
 		return bookRepository.save(editedBook);
 	}
     @DeleteMapping("/books/{id}")
