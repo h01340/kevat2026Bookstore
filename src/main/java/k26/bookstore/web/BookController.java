@@ -37,23 +37,6 @@ public class BookController {
         return "/books";
     }
  
- /*       @GetMapping("/")
-    public String getBooks(Model model) {
-
-        //bookRepository.findAll = Sql select * from book
-        model.addAttribute("books", bookRepository.findAll());
-        return "/books";
-    }
-
-           @GetMapping("/books")
-    public String getBooks2String(Model model) {
-
-        //bookRepository.findAll = Sql select * from book
-        model.addAttribute("books", bookRepository.findAll());
-        return "/books";
-    }
- */
-
     @GetMapping("/addBook")
     @PreAuthorize("hasRole('ADMIN')")
     public String addBook(Model model) {

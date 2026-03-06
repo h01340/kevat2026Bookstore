@@ -11,9 +11,11 @@ CREATE TABLE category (
 
 --listätään pari riviä 
 INSERT INTO category (name)
-VALUES ('sarjakuva'),
-('dekkari'),
-('dokumentti');
+VALUES ('Runous'),
+('Sarjakuva'),
+('Dokumentti'), 
+('Dekkari'),
+('Jokin muu');
 
 --luodaan taulu
 CREATE TABLE book (
@@ -27,8 +29,8 @@ CREATE TABLE book (
 --lisää rivejä tauluun
 INSERT INTO book (title, author, publication_year, category_id) 
 VALUES 
-('Mökkimaailma', 'Mari Marison',  1974, 1),
-('Puutarha', 'Minni Hiiri', 1970, 1);
+('Maaliskuun lauluja', 'Eino Leino',  1896, 1),
+('Talviyö', 'Eino Leino', 1905, 1);
 
 
 -- application_user-taulu
@@ -43,4 +45,5 @@ CREATE TABLE application_user (
 INSERT INTO application_user (username, password, role) 
 VALUES 
 ('user', '$2a$10$1DTvwpXVBArGFixHBuzVJObjTuXhIOkx5pse6KsYs8/C2ckxnGEou', 'USER'),
-('admin', '$2a$10$cDZgyF4xaPMmmoRW3OVcmuf.8o2YSx8.M7CeRKqi.1PVw.t3E8uEC', 'ADMIN');
+('admin', '$2a$10$cDZgyF4xaPMmmoRW3OVcmuf.8o2YSx8.M7CeRKqi.1PVw.t3E8uEC', 'ADMIN'),
+('Minna', '$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6', 'ADMIN');
