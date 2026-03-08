@@ -3,7 +3,6 @@ CREATE TABLE category (
     name VARCHAR(150) NOT NULL
 );
 
-
 CREATE TABLE book (
     id BIGSERIAL PRIMARY KEY,
     title VARCHAR(150) NOT NULL,
@@ -12,8 +11,6 @@ CREATE TABLE book (
 	category_id BIGINT REFERENCES category(id)
 );
 
-
--- application_user-taulu
 CREATE TABLE application_user (
     id BIGSERIAL PRIMARY KEY,
     role VARCHAR(100) NOT NULL,
