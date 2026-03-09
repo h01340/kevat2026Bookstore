@@ -42,7 +42,7 @@ public class BookController {
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
-        return "/addBook";
+        return "addBook";
     }
 
     
@@ -54,7 +54,7 @@ public class BookController {
             log.info("validation error tapahtui: " + book.toString());
             model.addAttribute("book", book);
             model.addAttribute("categories", categoryRepository.findAll());
-            return "/addBook";
+            return "addBook";
 
         }
         bookRepository.save(book);
@@ -77,7 +77,7 @@ public class BookController {
 
         model.addAttribute("book", bookRepository.findById(bookId));
          model.addAttribute("categories", categoryRepository.findAll());
-        return "/editBook";
+        return "editBook";
     }
 
     @PostMapping("/saveEditedBook")
@@ -88,7 +88,7 @@ public class BookController {
             log.info("validation error tapahtui: " + book.toString());
             model.addAttribute("book", book);
             model.addAttribute("categories", categoryRepository.findAll());
-            return "/editBook";
+            return "editBook";
         }
         bookRepository.save(book);
         return "redirect:/booklist";
