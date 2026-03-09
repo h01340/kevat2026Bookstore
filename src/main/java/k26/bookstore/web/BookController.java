@@ -34,7 +34,7 @@ public class BookController {
 
         //bookRepository.findAll = Sql select * from book
         model.addAttribute("books", bookRepository.findAll());
-        return "/books";
+        return "books";
     }
  
     @GetMapping("/addBook")
