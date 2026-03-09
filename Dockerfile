@@ -21,7 +21,7 @@ RUN ./mvnw clean install -DskipTests
 RUN cp target/*.jar /opt/app/app.jar
 
 # Runtime-vaihe
-FROM eeclipse-temurin:17-jdk-focal
+FROM eclipse-temurin:17-jdk-focal
 
 WORKDIR /opt/app
 
