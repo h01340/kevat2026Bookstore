@@ -1,5 +1,9 @@
+DROP TABLE application_user;
+DROP TABLE book;
+DROP TABLE category;
+
 CREATE TABLE category (
-    id BIGSERIAL PRIMARY KEY,
+    categoryid BIGSERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL
 );
 
@@ -8,7 +12,7 @@ CREATE TABLE book (
     title VARCHAR(150) NOT NULL,
     author VARCHAR(150) NOT NULL,
     publication_year INT,
-	category_id BIGINT REFERENCES category(id)
+	categoryid BIGINT REFERENCES category(categoryid)
 );
 
 CREATE TABLE application_user (

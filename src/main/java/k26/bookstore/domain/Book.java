@@ -25,15 +25,13 @@ public class Book {
 
     private String author;
 
-    @Column(name="publication_year")
+    @Column(name = "publication_year")
     private int publicationYear;
 
-   @JsonIgnoreProperties("books")
+    @JsonIgnoreProperties("books")
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private Category category; 
-
-
+    private Category category;
 
     public Book() {
     }
@@ -41,15 +39,14 @@ public class Book {
     public Book(String title, String author) {
         this.title = title;
         this.author = author;
-        
+
     }
+
     public Book(String title, String author, int publicationYear) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
-    } 
-
-    
+    }
 
     public Book(@NotEmpty(message = "Kirjan nimi ei voi olla tyhjä.") @Size(min = 3, max = 250) String title,
             String author, int publicationYear, Category category) {
@@ -62,28 +59,34 @@ public class Book {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
     }
+
     public String getAuthor() {
         return author;
     }
+
     public void setAuthor(String author) {
         this.author = author;
     }
+
     public int getPublicationYear() {
         return publicationYear;
     }
+
     public void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
     }
-   
 
     public Category getCategory() {
         return category;
@@ -92,12 +95,11 @@ public class Book {
     public void setCategory(Category category) {
         this.category = category;
     }
+
     @Override
     public String toString() {
-        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publicationYear=" + publicationYear + "]";
+        return "Book [id=" + id + ", title=" + title + ", author=" + author + ", publicationYear=" + publicationYear
+                + "]";
     }
-
-
-
 
 }

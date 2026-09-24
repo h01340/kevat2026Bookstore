@@ -17,14 +17,7 @@ import k26.bookstore.domain.UserRepository;
 @SpringBootApplication
 public class BookstoreApplication {
 
-	private final BookRepository bookRepository;
-	private final CategoryRepository categoryRepository;
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
-
-	BookstoreApplication(CategoryRepository categoryRepository, BookRepository bookRepository) {
-		this.categoryRepository = categoryRepository;
-		this.bookRepository = bookRepository;
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -35,6 +28,7 @@ public class BookstoreApplication {
 			CategoryRepository categoryRepository, UserRepository userRepository) {
 		return (args) -> {
 
+			log.info("kirjoja yhteensä " + bookRepository.count());
 			log.info("Check if there is already data in the database");
 			if (userRepository.count() == 0) {
 				log.info("Create some users");

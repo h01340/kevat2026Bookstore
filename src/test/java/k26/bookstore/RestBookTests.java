@@ -1,38 +1,27 @@
 package k26.bookstore;
 
-
-import javax.sql.DataSource;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import k26.bookstore.domain.Book;
+import tools.jackson.databind.ObjectMapper;
 
 @SpringBootTest
-//addFilters configuration enables testing without autentication
 @AutoConfigureMockMvc(addFilters = false)
-//Käytetään h2-kantaa testauksessa
-@org.springframework.test.context.ActiveProfiles("test") 
+// Käytetään h2-kantaa testauksessa
+// @org.springframework.test.context.ActiveProfiles("test")
 public class RestBookTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-
-    //If you want to print which db is used
-    @Autowired
-    DataSource dataSource;
-    @Test
-    void printDatasource() throws Exception {
-        System.out.println("Testidatan lähde: " + dataSource.getConnection().getMetaData().getURL());
-    } 
-
 
     // Get all books
     @Test
@@ -41,21 +30,34 @@ public class RestBookTests {
                 .andExpect(status().isOk());
     }
 
-    //Create new book
+    // Create new book
     @Test
     public void testPostBook() throws Exception {
         String newBookJson = """
-        {
-            "title":"Test Book",
-            "author":"Test Author",
-            "year":2024
-        }
-        """;
+                {
+                    "title":"Test Book",
+                    "author":"Test Author",
+                    "year":2024
+                }
+                """;
 
-        mockMvc.perform(post("/books")
+        String response = mockMvc.perform(post("/books")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(newBookJson))
+                .andExpect(status().isOk()).andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        System.out.println("UUDEN KIRJAN TIEDOT OVAT: " + response);
+        ObjectMapper mapper = new ObjectMapper();
+        Book createdBook = mapper.readValue(response, Book.class);
+        System.out.println("ID = " + createdBook.getId());
+
+        // jA POISTA KIRJA, ETTEI SE JÄÄ KANTAAN
+        Long id = createdBook.getId();
+        mockMvc.perform(delete("/books/" + id))
                 .andExpect(status().isOk());
+
     }
 
-   }
+}

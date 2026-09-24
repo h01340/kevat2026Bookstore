@@ -47,3 +47,7 @@ VALUES
 ('user', '$2a$10$1DTvwpXVBArGFixHBuzVJObjTuXhIOkx5pse6KsYs8/C2ckxnGEou', 'USER'),
 ('admin', '$2a$10$cDZgyF4xaPMmmoRW3OVcmuf.8o2YSx8.M7CeRKqi.1PVw.t3E8uEC', 'ADMIN'),
 ('Minna', '$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6', 'ADMIN');
+
+SELECT * FROM BOOK; 
+SELECT * FROM CATEGORY; 
+SELECT * FROM APPLICATION_USER;

@@ -21,31 +21,30 @@ public class BookController {
     private static final Logger log = LoggerFactory.getLogger(BookController.class);
 
     private final BookRepository bookRepository;
-	private final CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-	public BookController(BookRepository bookRepository, 
-        CategoryRepository categoryRepository) {
-		this.bookRepository = bookRepository;
+    public BookController(BookRepository bookRepository,
+            CategoryRepository categoryRepository) {
+        this.bookRepository = bookRepository;
         this.categoryRepository = categoryRepository;
-	}
+    }
 
-    @GetMapping(value={"/", "/booklist"})
+    @GetMapping(value = { "/", "/booklist" })
     public String getBooks(Model model) {
 
-        //bookRepository.findAll = Sql select * from book
+        // bookRepository.findAll = Sql select * from book
         model.addAttribute("books", bookRepository.findAll());
         return "books";
     }
- 
+
     @GetMapping("/addBook")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String addBook(Model model) {
         model.addAttribute("book", new Book());
         model.addAttribute("categories", categoryRepository.findAll());
         return "addBook";
     }
 
-    
     @PostMapping("/saveBook")
     @PreAuthorize("hasRole('ADMIN')")
     public String saveBook(@Valid Book book, BindingResult bindingResult, Model model) {
@@ -65,18 +64,18 @@ public class BookController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteBook(@PathVariable("id") Long bookId, Model model) {
         log.info("Kirjan id " + bookId);
-        //sql delete from book where id =?
+        // sql delete from book where id =?
         bookRepository.deleteById(bookId);
         return "redirect:/booklist";
     }
-    
+
     @GetMapping("/editBook/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String editBook(@PathVariable("id") Long bookId, Model model) {
         log.info("Kirjan id " + bookId);
 
         model.addAttribute("book", bookRepository.findById(bookId));
-         model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "editBook";
     }
 
@@ -84,7 +83,7 @@ public class BookController {
     @PreAuthorize("hasAuthority('ADMIN')")
     public String saveEditedBook(@Valid @ModelAttribute Book book, BindingResult bindingResult, Model model) {
         log.info("EDITED BOOK: " + book.toString());
-         if (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             log.info("validation error tapahtui: " + book.toString());
             model.addAttribute("book", book);
             model.addAttribute("categories", categoryRepository.findAll());
@@ -93,6 +92,5 @@ public class BookController {
         bookRepository.save(book);
         return "redirect:/booklist";
     }
-    
 
 }

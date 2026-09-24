@@ -21,9 +21,9 @@ import k26.bookstore.domain.BookRepository;
 public class RestBookController {
 
     private static final Logger log = LoggerFactory.getLogger(RestBookController.class);
-    
+
     private final BookRepository bookRepository;
-    
+
     public RestBookController(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
@@ -32,7 +32,7 @@ public class RestBookController {
     public Iterable<Book> findAllBooks() {
         return bookRepository.findAll();
     }
-    
+
     @GetMapping("/books/{id}")
     public Optional<Book> findById(@PathVariable("id") Long bookId) {
         return bookRepository.findById(bookId);
@@ -46,33 +46,26 @@ public class RestBookController {
 
     @PutMapping("books/{id}")
     public Book saveEditedBook(@RequestBody Book editedBook, @PathVariable Long id) {
-		log.info("Update the book information to db: " + editedBook + " and id is " + id);
+        log.info("Update the book information to db: " + editedBook + " and id is " + id);
         editedBook.setId(id);
 
-		return bookRepository.save(editedBook);
-	}
+        return bookRepository.save(editedBook);
+    }
+
     @DeleteMapping("/books/{id}")
     // public void deleteBook(@PathVariable Long id) {
-    
     public Iterable<Book> deleteBook(@PathVariable Long id) {
         System.out.println("poistettavan kirjan id " + id);
         bookRepository.deleteById(id);
         return bookRepository.findAll();
     }
 
-
-
-
-
-
-    //TODO: korjaa
+    // TODO: korjaa
     @GetMapping("/booksByTitle")
     public List<Book> findByTitle(@RequestParam String title) {
         return bookRepository.findByAuthor(title);
     }
 
-    //TODO: https://openlibrary.org/developers/api
-    
-
+    // TODO: https://openlibrary.org/developers/api
 
 }

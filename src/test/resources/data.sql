@@ -5,7 +5,7 @@ VALUES ('sarjakuva'),
 ('dekkari'),
 ('dokumentti');
 
-INSERT INTO book (title, author, publication_year, category_id) 
+INSERT INTO book (title, author, publication_year, categoryid) 
 VALUES 
 ('Mökkimaailma', 'Mari Marison',  1974, 1),
 ('Puutarha', 'Minni Hiiri', 1970, 1);
