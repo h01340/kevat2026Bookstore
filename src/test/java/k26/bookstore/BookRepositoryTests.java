@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import k26.bookstore.domain.Book;
 import k26.bookstore.domain.BookRepository;
@@ -34,6 +33,7 @@ public class BookRepositoryTests {
 
     @Test
     void printDatasource() throws Exception {
+        System.out.println("NÄYTÄ MITÄ TIETOKANTAA TESTAAT!");
         System.out.println("Database URL: " + dataSource.getConnection().getMetaData().getURL());
         Iterable<Book> books = bookRepository.findAll();
         assertThat(books).isNotEmpty();
