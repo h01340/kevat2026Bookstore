@@ -23,6 +23,20 @@ public class RestBookTests {
     @Autowired
     private MockMvc mockMvc;
 
+    // Smoke test case
+    @Test
+    void getBooksWorks() throws Exception {
+        mockMvc.perform(get("/books"))
+                .andExpect(status().isOk());
+    }
+
+    // Smoke test case
+    @Test
+    void getApiCategoriesWorks() throws Exception {
+        mockMvc.perform(get("/rest/categories"))
+                .andExpect(status().isOk());
+    }
+
     // Get all books
     @Test
     public void testGetBooksWithoutAuth() throws Exception {
