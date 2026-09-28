@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
+import org.springframework.test.context.ActiveProfiles;
 
 import k26.bookstore.domain.Book;
 import k26.bookstore.domain.BookRepository;
@@ -17,7 +18,7 @@ import k26.bookstore.domain.CategoryRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-// @ActiveProfiles("test") // käyttää testiasetuksia → H2
+@ActiveProfiles("test") // käyttää testiasetuksia → H2
 public class BookRepositoryTests {
 
     // Field injection can be used in test cases
