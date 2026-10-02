@@ -46,7 +46,8 @@ public class BookController {
     }
 
     @PostMapping("/saveBook")
-    @PreAuthorize("hasRole('ADMIN')")
+    // note. hasRole('ADMIN') works only with H2 db
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String saveBook(@Valid Book book, BindingResult bindingResult, Model model) {
         log.info("Kirja " + book.toString());
         if (bindingResult.hasErrors()) {
